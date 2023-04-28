@@ -18,6 +18,8 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+mongoose.connect("mongodb+srv://admin:admin@cluster0.wp2cymx.mongodb.net/blogDB").then(() => console.log("It ran")).catch((err) => console.error(err))
+
 
 const postSchema = {
   title: String,
@@ -67,9 +69,7 @@ app.get("/contact", function(req, res){
   res.render("contact", {contactContent: contactContent});
 });
 
-mongoose.connect("mongodb+srv://admin:admin@cluster0.wp2cymx.mongodb.net/blogDB").then(() => console.log("It ran")).catch((err) => console.error(err))
-.then(
 app.listen(3000, function() {
   console.log(process.env.MONGO_URL);
   console.log("Server started on port 3000");
-}));
+});
